@@ -16,6 +16,15 @@ class User extends Admin_Controller {
 		$crud->columns('groups', 'username', 'email', 'first_name', 'last_name', 'active');
 		$this->unset_crud_fields('ip_address', 'last_login');
 
+		// validation with custom error messages (v1.5.8)
+		$crud->set_rules('username', 'Username', 'required', array('required' => 'A username is required for each user.'));
+		$crud->set_rules('email', 'Email', 'required|valid_email', array(
+			'required'    => 'An email address is required.',
+			'valid_email' => 'Please provide a valid email address.',
+		));
+		$crud->set_rules('first_name', 'First Name', 'required', array('required' => 'First name cannot be empty.'));
+		$crud->set_rules('last_name', 'Last Name', 'required', array('required' => 'Last name cannot be empty.'));
+
 		// only webmaster and admin can change member groups
 		if ($crud->getState()=='list' || $this->ion_auth->in_group(array('webmaster', 'admin')))
 		{

@@ -23,6 +23,11 @@ class Panel extends Admin_Controller {
 		$crud->columns('groups', 'username', 'first_name', 'last_name', 'active');
 		$this->unset_crud_fields('ip_address', 'last_login');
 
+		// validation with custom error messages (v1.5.8)
+		$crud->set_rules('username', 'Username', 'required', array('required' => 'A username is required for each admin user.'));
+		$crud->set_rules('first_name', 'First Name', 'required', array('required' => 'First name cannot be empty.'));
+		$crud->set_rules('last_name', 'Last Name', 'required', array('required' => 'Last name cannot be empty.'));
+
 		// cannot change Admin User groups once created
 		if ($crud->getState()=='list')
 		{
