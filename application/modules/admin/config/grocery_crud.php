@@ -34,11 +34,15 @@
 	//The environment is important so we can have specific configurations for specific environments
 	$config['grocery_crud_environment'] = 'production';
 
+	// Turn XSS clean on since Admin Panel CRUD forms are exposed to authenticated users (v1.5.7)
+	$config['grocery_crud_xss_clean'] = TRUE;
+
 	/**
 	 * Added by CI Bootstrap 3
 	 */
 	$config['grocery_crud_unset_jquery'] = TRUE;
 	$config['grocery_crud_unset_jquery_ui'] = FALSE;
+	$config['grocery_crud_unset_bootstrap'] = TRUE;
 	$config['grocery_crud_unset_print'] = FALSE;
 	$config['grocery_crud_unset_export'] = FALSE;
 	$config['grocery_crud_unset_read'] = FALSE;

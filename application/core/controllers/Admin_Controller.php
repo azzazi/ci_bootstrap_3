@@ -45,10 +45,10 @@ class Admin_Controller extends MY_Controller {
 		$crud = new grocery_CRUD();
 		$crud->set_table($table);
 
-		// auto-generate subject
+		// auto-generate subject with plural form (v1.5.0)
 		if ( empty($subject) )
 		{
-			$crud->set_subject(humanize(singular($table)));
+			$crud->set_subject(humanize(singular($table)), humanize($table));
 		}
 
 		// load settings from: application/config/grocery_crud.php
@@ -60,6 +60,9 @@ class Admin_Controller extends MY_Controller {
 
 		if ($this->config->item('grocery_crud_unset_jquery_ui'))
 			$crud->unset_jquery_ui();
+
+		if ($this->config->item('grocery_crud_unset_bootstrap'))
+			$crud->unset_bootstrap();
 
 		if ($this->config->item('grocery_crud_unset_print'))
 			$crud->unset_print();
